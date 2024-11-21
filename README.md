@@ -39,7 +39,7 @@ C_n=\int_0^1f(t)e^{-n2\pi it}dt
 Which is also explained very well in 3Blue1Brown's video.
 
 To recreate any svg, I used svgpathtools to turn the .svg picture into a complex function, and I sampled a number of complex points for an evenly spaced set of t values. I then used this to apply the formula immediately above to find each constant for a
-desired vector count n. Since integration would be computationally expensive that many times, I opted for a Riemann sum. The formula I actually used was:
+desired vector count n. Since integration would be computationally expensive that many times, I opted for a Riemann sum. The formula I initially used was:
 ```math
 C_n \approx \sum_{m=0}^{r} f\left(t_m\right)e^{-n2\pi it_m}\Delta t  \hspace{35pt}  t_m = \frac{m}{r}   \hspace{35pt}   \Delta t = \frac{1}{r}
 ```
@@ -47,6 +47,8 @@ C_n \approx \sum_{m=0}^{r} f\left(t_m\right)e^{-n2\pi it_m}\Delta t  \hspace{35p
 I could then increase or decrease r, the resolution, depending on how intricate the image was.
 
 Adding together each vector as t increased from 0 to 1 would recreate the original picture, only now it was entirely composed of rotating vectors, each rotating at a constant speed.
+
+This calculation is known as the fourier transform, and I was calculating it for each vector which is $O(n^2)$. There is an algorithm known as the fast fourier transform, however, that is, as the name implies, faster. As I started visualizing more complex shapes, such as the elk, I decided to switch to this method.
 
 ### Examples
 
@@ -82,6 +84,7 @@ To run this project, you need to install the following Python libraries:
 - `matplotlib`: For visualization (optional).
 - `ffmpeg`: For gif creation.
 - `manim`: For creating the mp4 of the Fourier visualization.
+- `scipy`: For the Fast Fourier Transform.
 
 You can install them using `pip`:
 

@@ -4,9 +4,9 @@
 import svgpathtools as svg
 import numpy as np
 
-VECTOR_COUNT = 128 #High runtime impact, Number of arrows spinning around in the animation
-SAMPLE_COUNT = 10000 #Medium runtime impact, Number of points sampled from svg
-SVGFILEPATH = "svg/yourfile.svg" #Replace yourfile with the name of your svg
+VECTOR_COUNT = 64 #High runtime impact, Number of arrows spinning around in the animation
+SAMPLE_COUNT = 1000 #Medium runtime impact, Number of points sampled from svg
+SVGFILEPATH = "yourfile" #Replace yourfile with the name of your svg
 
 def distance(point1, point2):
     return abs(point1 - point2)
@@ -31,9 +31,9 @@ def svg_to_func(svg_file, f_res, resolution=10000):
     scale_factor = desired_size / max_distance
     points_array *= scale_factor
     
-    t_values = np.linspace(0, 1, len(n_range))
+    t_values = np.linspace(0, 1, len(points))
 
-    dt = 1 / len(t_values)
+    dt = 1 / len(points)
 
     #Here's finding each constant!
     n_range = list(range(-f_res, f_res + 1))

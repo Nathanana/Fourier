@@ -10,7 +10,7 @@ def automate_manim(svg_file, output_name):
 
     target_svg = "svg/target.svg"
 
-    shutil.copy(svg_file, target_svg)
+    shutil.copy(f"svg/{svg_file}", target_svg)
 
     try:
         manim_command = ["manim", "-pqh", "Animation.py", "FourierAnimation"]
