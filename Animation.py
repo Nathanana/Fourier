@@ -8,7 +8,7 @@ DURATION = 20 #Duration of animation in seconds
 
 class FourierAnimation(Scene):
     def construct(self):
-        resolution = 500
+        resolution = 500 #Wont affect much unless the drawing is super intricate, turn duration to like 1 or 2 if you're going to mess with this until you find something you like
         fourier_func, funclist = svg_to_func("svg/target.svg", VECTOR_COUNT, SAMPLE_COUNT)
         t_values = np.linspace(0, 1, resolution)
 

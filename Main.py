@@ -4,7 +4,7 @@ import subprocess
 import argparse
 
 def automate_manim(svg_file, output_name):
-    if not os.path.isfile(svg_file):
+    if not os.path.isfile(f"svg/{svg_file}"):
         print(f"Error: {svg_file} does not exist.")
         return
 
@@ -29,8 +29,8 @@ def automate_manim(svg_file, output_name):
         final_gif_name = f"{output_name}.gif"
         final_mp4_name = f"{output_name}.mp4"
 
-        shutil.move(gif_output, final_gif_name)
-        shutil.move("media/videos/Animation/1080p60/FourierAnimation.mp4", f"media/videos/Animation/1080p60/{final_mp4_name}")
+        shutil.move(gif_output, f"gifs/{final_gif_name}")
+        shutil.move("media/videos/Animation/1080p60/FourierAnimation.mp4", f"videos/{final_mp4_name}")
 
         print(f"Process completed. Outputs: {final_gif_name}, {final_mp4_name}")
 
@@ -42,7 +42,7 @@ def automate_manim(svg_file, output_name):
 
 def main():
     parser = argparse.ArgumentParser(description="Automate Manim and FFmpeg tasks.")
-    parser.add_argument("svg_file", help="Path to the SVG file to use.")
+    parser.add_argument("svg_file", help="Name of svg file to use, should be in Fourier/svg.")
     parser.add_argument("output_name", help="Base name for the output GIF and MP4.")
     args = parser.parse_args()
 

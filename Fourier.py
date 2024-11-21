@@ -1,10 +1,12 @@
 #Play around with vector and sample count in this file until the shape looks good before animating, since animating can take a long time
+#Beyond the two parameters at the top, there is one more you can play with at the bottom for super complex shapes that may help
 
 import svgpathtools as svg
 import numpy as np
 
 VECTOR_COUNT = 128 #High runtime impact, Number of arrows spinning around in the animation
 SAMPLE_COUNT = 10000 #Medium runtime impact, Number of points sampled from svg
+SVGFILEPATH = "svg/yourfile.svg" #Replace yourfile with the name of your svg
 
 def distance(point1, point2):
     return abs(point1 - point2)
@@ -29,10 +31,11 @@ def svg_to_func(svg_file, f_res, resolution=10000):
     scale_factor = desired_size / max_distance
     points_array *= scale_factor
     
-    t_values = np.linspace(0, 1, len(points))
+    t_values = np.linspace(0, 1, len(n_range))
 
-    dt = 1 / len(points)
+    dt = 1 / len(t_values)
 
+    #Here's finding each constant!
     n_range = list(range(-f_res, f_res + 1))
     n_range = sorted(n_range, key=lambda x: (abs(x), x < 0))
     n_range = np.array(n_range)
@@ -49,7 +52,7 @@ def svg_to_func(svg_file, f_res, resolution=10000):
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
     
-    fourier_function, _ = svg_to_func('svg/arrow.svg', VECTOR_COUNT, SAMPLE_COUNT)
+    fourier_function, _ = svg_to_func(f'svg/{SVGFILEPATH}.svg', VECTOR_COUNT, SAMPLE_COUNT)
     
     import matplotlib.pyplot as plt
     resolution = 500 #Keep this, it only samples points from the already established approximation so increasing it won't increase accuracy unless shape is super complex
