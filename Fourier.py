@@ -1,7 +1,10 @@
+#Play around with vector and sample count in this file until the shape looks good before animating, since animating can take a long time
+
 import svgpathtools as svg
 import numpy as np
-from scipy.interpolate import PchipInterpolator
-import matplotlib.pyplot as plt
+
+VECTOR_COUNT = 128 #High runtime impact, Number of arrows spinning around in the animation
+SAMPLE_COUNT = 10000 #Medium runtime impact, Number of points sampled from svg
 
 def distance(point1, point2):
     return abs(point1 - point2)
@@ -44,10 +47,12 @@ def svg_to_func(svg_file, f_res, resolution=10000):
     return fourier, funclist
 
 if __name__ == '__main__':
-    fourier_function, _ = svg_to_func('svg/arrow.svg', 1024, 100000)
+    import matplotlib.pyplot as plt
+    
+    fourier_function, _ = svg_to_func('svg/arrow.svg', VECTOR_COUNT, SAMPLE_COUNT)
     
     import matplotlib.pyplot as plt
-    resolution = 500
+    resolution = 500 #Keep this, it only samples points from the already established approximation so increasing it won't increase accuracy unless shape is super complex
     t_values = np.linspace(0, 1, resolution)
     points = [fourier_function(t).real + 1j * fourier_function(t).imag for t in t_values]
     plt.plot([p.real for p in points], [p.imag for p in points])

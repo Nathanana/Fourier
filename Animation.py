@@ -2,10 +2,14 @@ from manim import *
 import numpy as np
 from Fourier import svg_to_func
 
+VECTOR_COUNT = 128 #Number of arrows spinning around in the animation
+SAMPLE_COUNT = 1000 #Number of points sampled from svg
+DURATION = 20 #Duration of animation in seconds
+
 class FourierAnimation(Scene):
     def construct(self):
         resolution = 500
-        fourier_func, funclist = svg_to_func("svg/target.svg", 1024, 100000)
+        fourier_func, funclist = svg_to_func("svg/target.svg", VECTOR_COUNT, SAMPLE_COUNT)
         t_values = np.linspace(0, 1, resolution)
 
         vectors = VGroup()
@@ -65,4 +69,4 @@ class FourierAnimation(Scene):
             path.set_stroke(width = 1)
             
 
-        self.play(UpdateFromAlphaFunc(vectors, update, run_time=20, rate_func=linear)) 
+        self.play(UpdateFromAlphaFunc(vectors, update, run_time=DURATION, rate_func=linear)) 

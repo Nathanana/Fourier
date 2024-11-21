@@ -30,7 +30,7 @@ def automate_manim(svg_file, output_name):
         final_mp4_name = f"{output_name}.mp4"
 
         shutil.move(gif_output, final_gif_name)
-        shutil.move("media/videos/Animation/1080p60/FourierAnimation.mp4", final_mp4_name)
+        shutil.move("media/videos/Animation/1080p60/FourierAnimation.mp4", f"media/videos/Animation/1080p60/{final_mp4_name}")
 
         print(f"Process completed. Outputs: {final_gif_name}, {final_mp4_name}")
 
