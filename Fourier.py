@@ -4,8 +4,9 @@
 import svgpathtools as svg
 import numpy as np
 
-VECTOR_COUNT = 64 #High runtime impact, Number of arrows spinning around in the animation
+VECTOR_COUNT = 128 #High runtime impact, Number of arrows spinning around in the animation
 SAMPLE_COUNT = 1000 #Medium runtime impact, Number of points sampled from svg
+PRECISION = 1E-3 #Length of smallest vector
 SVGFILEPATH = "yourfile" #Replace yourfile with the name of your svg
 
 def distance(point1, point2):
@@ -43,6 +44,7 @@ def svg_to_func(svg_file, f_res, resolution=10000):
     coefficients = points_array @ exp_matrix * dt 
 
     funclist = list(zip(coefficients[1:], n_range[1:]))
+    funclist = [(c, n) for c, n in funclist if np.abs(c) >= PRECISION] #Comment this out if you want all the vectors, maximum precision
     
     def fourier(t):
         return sum(c[0] * np.exp(2j * np.pi * c[1] * t) for c in funclist)

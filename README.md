@@ -82,7 +82,6 @@ To run this project, you need to install the following Python libraries:
 - `matplotlib`: For visualization (optional).
 - `ffmpeg`: For gif creation.
 - `manim`: For creating the mp4 of the Fourier visualization.
-- `scipy`: For the Fast Fourier Transform.
 
 You can install them using `pip`:
 
@@ -92,5 +91,5 @@ Rather than me explaining it crudely, I recommend going to Manim's [installation
 
 Everything besides FFmpeg can be installed using pip
 ```bash
-pip install svgpathtools numpy scipy matplotlib manim
+pip install svgpathtools numpy smatplotlib manim
 ```
